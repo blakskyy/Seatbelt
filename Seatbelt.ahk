@@ -15,14 +15,16 @@ if !FileExist("pssuspend.exe") {
 }
 
 Numpad0::
-Run, pssuspend.exe %ProcessName%,,Hide
+Process, Exist, %ProcessName%
+if (ErrorLevel != 0) {
+	Run, pssuspend.exe %ProcessName%,,Hide
 
-SoundBeep, 500, 500
-SoundBeep, 450, 150
-SoundBeep, 450, 150
+	SoundBeep, 500, 500
+	SoundBeep, 450, 150
+	SoundBeep, 450, 150
+	Sleep FreezeDelay
+	SoundBeep, 700, 150
+	SoundBeep, 700, 150
 
-Sleep FreezeDelay
-SoundBeep, 700, 150
-SoundBeep, 700, 150
-
-Run, pssuspend.exe -r %ProcessName%,,Hide
+	Run, pssuspend.exe -r %ProcessName%,,Hide
+}
