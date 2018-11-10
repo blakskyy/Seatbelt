@@ -3,6 +3,7 @@ SendMode Input  ; Recommended for new scripts due to its superior speed and reli
 SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 
 ProcessName = GTA5.exe
+WindowTitle = Grand Theft Auto V
 FreezeDelay = 10000
 
 if !FileExist("pssuspend.exe") {
@@ -15,8 +16,7 @@ if !FileExist("pssuspend.exe") {
 }
 
 Numpad0::
-Process, Exist, %ProcessName%
-if (ErrorLevel != 0) {
+if (WinActive(WindowTitle)) {
 	Run, pssuspend.exe %ProcessName%,,Hide
 
 	SoundBeep, 500, 500
